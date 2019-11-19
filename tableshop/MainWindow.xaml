@@ -41,16 +41,16 @@
         <DataGridTemplateColumn ClipboardContentBinding="{x:Null}" Header="Description" MinWidth="200">
           <DataGridTemplateColumn.CellTemplate>
             <DataTemplate>
-              <TextBox Text="{Binding Description}" AcceptsReturn="True"/>
+              <TextBox Text="{Binding Path=Description}" AcceptsReturn="True"/>
             </DataTemplate>
           </DataGridTemplateColumn.CellTemplate>
         </DataGridTemplateColumn>
         <DataGridTextColumn Binding="{Binding Size}" ClipboardContentBinding="{x:Null}" Header="Size" CanUserSort="False"/>
-        <DataGridCheckBoxColumn Binding="{Binding Public}" ClipboardContentBinding="{x:Null}" Header="Public" CanUserSort="False"/>
+        <DataGridCheckBoxColumn Binding="{Binding IsPublic}" ClipboardContentBinding="{x:Null}" Header="Public" CanUserSort="False"/>
         <DataGridTemplateColumn ClipboardContentBinding="{x:Null}" Header="Comment" MinWidth="200">
           <DataGridTemplateColumn.CellTemplate>
             <DataTemplate>
-              <TextBox Text="{Binding Comment}" AcceptsReturn="True"/>
+              <TextBox Text="{Binding Path=Comment}" AcceptsReturn="True"/>
             </DataTemplate>
           </DataGridTemplateColumn.CellTemplate>
         </DataGridTemplateColumn>
