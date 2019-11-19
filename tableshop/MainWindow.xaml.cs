@@ -1,11 +1,10 @@
 ﻿using Microsoft.Win32;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Windows;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace tableshop
 {
@@ -59,6 +58,39 @@ namespace tableshop
           WriteIndented = true,
         });
         File.WriteAllText(saveFileDialog.FileName, json);
+      }
+    }
+
+    private void Export(object sender, RoutedEventArgs e)
+    {
+      SaveFileDialog saveFileDialog = new SaveFileDialog
+      {
+        DefaultExt = ".xlsx",
+        Filter = "Excel files (.xlsx)|*.xlsx",
+      };
+      bool? dialogResult = saveFileDialog.ShowDialog();
+      if (dialogResult == true)
+      {
+        var app = new Excel.Application();
+        app.Workbooks.Add();
+        Excel._Worksheet ws = app.ActiveSheet;
+        Excel.Range cells = ws.Cells;
+        int row = 1;
+        int col = 1;
+        cells[row, col++] = "Category";
+        cells[row, col++] = "Field Name";
+        cells[row, col++] = "Description";
+        cells[row, col++] = "Size";
+        foreach (Item item in dataTable)
+        {
+          row++;
+          col = 1;
+          cells[row, col++] = item.Category;
+          cells[row, col++] = item.IsPublic ? item.FieldName : "Reserved";
+          cells[row, col++] = item.IsPublic ? item.Description : "";
+          cells[row, col++] = item.Size;
+        }
+        app.Visible = true;
       }
     }
 
