@@ -1,4 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using Microsoft.Win32;
+using System;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Windows;
@@ -31,7 +34,18 @@ namespace tableshop
 
     private void SaveAs(object sender, RoutedEventArgs e)
     {
-      string json = JsonSerializer.Serialize(dataTable);
+      SaveFileDialog saveFileDialog = new SaveFileDialog
+      {
+        DefaultExt = "json",
+        Filter = "JSON files (.json)|*.json",
+      };
+      bool? dialogResult = saveFileDialog.ShowDialog();
+      if (dialogResult == true)
+      {
+        string filename = saveFileDialog.FileName;
+        string json = JsonSerializer.Serialize(dataTable);
+        File.WriteAllText(filename, json);
+      }
     }
 
     private void InsertBelow(object sender, RoutedEventArgs e)
