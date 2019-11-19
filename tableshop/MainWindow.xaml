@@ -33,7 +33,7 @@
       <Button Content="Remove row" Click="RemoveRow"/>
     </ToolBar>
 
-    <DataGrid Name="dataGrid" ItemsSource="{Binding}" Grid.Row="2">
+    <DataGrid Name="dataGrid" ItemsSource="{Binding}" AutoGenerateColumns="False" Grid.Row="2">
       <DataGrid.Columns>
         <DataGridTextColumn Binding="{Binding Category}" ClipboardContentBinding="{x:Null}" Header="Category"/>
         <DataGridTextColumn Binding="{Binding FieldName}" ClipboardContentBinding="{x:Null}" Header="Field Name"/>
