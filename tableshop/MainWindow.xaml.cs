@@ -54,9 +54,11 @@ namespace tableshop
       bool? dialogResult = saveFileDialog.ShowDialog();
       if (dialogResult == true)
       {
-        string filename = saveFileDialog.FileName;
-        string json = JsonSerializer.Serialize(dataTable);
-        File.WriteAllText(filename, json);
+        string json = JsonSerializer.Serialize(dataTable, new JsonSerializerOptions
+        {
+          WriteIndented = true,
+        });
+        File.WriteAllText(saveFileDialog.FileName, json);
       }
     }
 
