@@ -40,13 +40,19 @@
         <DataGridTemplateColumn ClipboardContentBinding="{x:Null}" Header="Description">
           <DataGridTemplateColumn.CellTemplate>
             <DataTemplate>
-              <TextBox AcceptsReturn="True"/>
+              <TextBox Text="{Binding Description}" AcceptsReturn="True"/>
             </DataTemplate>
           </DataGridTemplateColumn.CellTemplate>
         </DataGridTemplateColumn>
         <DataGridTextColumn Binding="{Binding Size}" ClipboardContentBinding="{x:Null}" Header="Size"/>
         <DataGridCheckBoxColumn Binding="{Binding Public}" ClipboardContentBinding="{x:Null}" Header="Public"/>
-        <DataGridTextColumn Binding="{Binding Comment}" ClipboardContentBinding="{x:Null}" Header="Comment"/>
+        <DataGridTemplateColumn ClipboardContentBinding="{x:Null}" Header="Comment">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <TextBox Text="{Binding Comment}" AcceptsReturn="True"/>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
       </DataGrid.Columns>
     </DataGrid>
   </Grid>
