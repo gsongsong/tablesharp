@@ -4,7 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" WindowState="Maximized"
+        Title="MainWindow" Height="450" Width="800"
         Loaded="Window_Loaded">
   <Grid>
     <Grid.RowDefinitions>
@@ -35,18 +35,18 @@
 
     <DataGrid Name="dataGrid" ItemsSource="{Binding}" AutoGenerateColumns="False" Grid.Row="2">
       <DataGrid.Columns>
-        <DataGridTextColumn Binding="{Binding Category}" ClipboardContentBinding="{x:Null}" Header="Category"/>
-        <DataGridTextColumn Binding="{Binding FieldName}" ClipboardContentBinding="{x:Null}" Header="Field Name"/>
-        <DataGridTemplateColumn ClipboardContentBinding="{x:Null}" Header="Description">
+        <DataGridTextColumn Binding="{Binding Category}" ClipboardContentBinding="{x:Null}" Header="Category" CanUserSort="False"/>
+        <DataGridTextColumn Binding="{Binding FieldName}" ClipboardContentBinding="{x:Null}" Header="Field Name" CanUserSort="False"/>
+        <DataGridTemplateColumn ClipboardContentBinding="{x:Null}" Header="Description" MinWidth="200">
           <DataGridTemplateColumn.CellTemplate>
             <DataTemplate>
               <TextBox Text="{Binding Description}" AcceptsReturn="True"/>
             </DataTemplate>
           </DataGridTemplateColumn.CellTemplate>
         </DataGridTemplateColumn>
-        <DataGridTextColumn Binding="{Binding Size}" ClipboardContentBinding="{x:Null}" Header="Size"/>
-        <DataGridCheckBoxColumn Binding="{Binding Public}" ClipboardContentBinding="{x:Null}" Header="Public"/>
-        <DataGridTemplateColumn ClipboardContentBinding="{x:Null}" Header="Comment">
+        <DataGridTextColumn Binding="{Binding Size}" ClipboardContentBinding="{x:Null}" Header="Size" CanUserSort="False"/>
+        <DataGridCheckBoxColumn Binding="{Binding Public}" ClipboardContentBinding="{x:Null}" Header="Public" CanUserSort="False"/>
+        <DataGridTemplateColumn ClipboardContentBinding="{x:Null}" Header="Comment" MinWidth="200">
           <DataGridTemplateColumn.CellTemplate>
             <DataTemplate>
               <TextBox Text="{Binding Comment}" AcceptsReturn="True"/>
