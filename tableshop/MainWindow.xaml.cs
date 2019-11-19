@@ -36,6 +36,7 @@ namespace tableshop
       bool? dialogResult = openFileDialog.ShowDialog();
       if (dialogResult == true)
       {
+        filename.Content = openFileDialog.FileName;
         string json = File.ReadAllText(openFileDialog.FileName);
         List<Item> list = JsonSerializer.Deserialize<List<Item>>(json);
         dataTable = new ObservableCollection<Item>(list);

@@ -20,8 +20,8 @@
         <ColumnDefinition Width="Auto"/>
       </Grid.ColumnDefinitions>
 
-      <Label Content="Table File"/>
-      <TextBox Grid.Column="1"/>
+      <Label Content="Table File:"/>
+      <Label Name="filename" Grid.Column="1"/>
       <Button Content="Browse..." Click="Open" Grid.Column="2"/>
     </Grid>
 
