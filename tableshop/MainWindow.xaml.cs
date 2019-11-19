@@ -1,4 +1,6 @@
 ﻿using System.Collections.ObjectModel;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Windows;
 
 namespace tableshop
@@ -25,6 +27,11 @@ namespace tableshop
       int selectedIndex = dataGrid.SelectedIndex;
       if (selectedIndex == -1) return;
       dataTable.Insert(selectedIndex, new Item());
+    }
+
+    private void SaveAs(object sender, RoutedEventArgs e)
+    {
+      string json = JsonSerializer.Serialize(dataTable);
     }
 
     private void InsertBelow(object sender, RoutedEventArgs e)

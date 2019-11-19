@@ -26,7 +26,7 @@
     </Grid>
 
     <ToolBar Grid.Row="1">
-      <Button Content="Save as..."/>
+      <Button Content="Save as..." Click="SaveAs"/>
       <Separator/>
       <Button Content="Insert above" Click="InsertAbove"/>
       <Button Content="Insert below" Click="InsertBelow"/>
