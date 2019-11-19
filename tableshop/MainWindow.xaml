@@ -22,7 +22,7 @@
 
       <Label Content="Table File"/>
       <TextBox Grid.Column="1"/>
-      <Button Content="Browse..." Grid.Column="2"/>
+      <Button Content="Browse..." Click="Open" Grid.Column="2"/>
     </Grid>
 
     <ToolBar Grid.Row="1">

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text.Json;
@@ -25,18 +26,28 @@ namespace tableshop
       dataGrid.DataContext = dataTable;
     }
 
-    private void InsertAbove(object sender, RoutedEventArgs e)
+    private void Open(object sender, RoutedEventArgs e)
     {
-      int selectedIndex = dataGrid.SelectedIndex;
-      if (selectedIndex == -1) return;
-      dataTable.Insert(selectedIndex, new Item());
+      OpenFileDialog openFileDialog = new OpenFileDialog
+      {
+        DefaultExt = ".json",
+        Filter = "JSON files (.json)|*.json",
+      };
+      bool? dialogResult = openFileDialog.ShowDialog();
+      if (dialogResult == true)
+      {
+        string json = File.ReadAllText(openFileDialog.FileName);
+        List<Item> list = JsonSerializer.Deserialize<List<Item>>(json);
+        dataTable = new ObservableCollection<Item>(list);
+        dataGrid.DataContext = dataTable;
+      }
     }
 
     private void SaveAs(object sender, RoutedEventArgs e)
     {
       SaveFileDialog saveFileDialog = new SaveFileDialog
       {
-        DefaultExt = "json",
+        DefaultExt = ".json",
         Filter = "JSON files (.json)|*.json",
       };
       bool? dialogResult = saveFileDialog.ShowDialog();
@@ -46,6 +57,13 @@ namespace tableshop
         string json = JsonSerializer.Serialize(dataTable);
         File.WriteAllText(filename, json);
       }
+    }
+
+    private void InsertAbove(object sender, RoutedEventArgs e)
+    {
+      int selectedIndex = dataGrid.SelectedIndex;
+      if (selectedIndex == -1) return;
+      dataTable.Insert(selectedIndex, new Item());
     }
 
     private void InsertBelow(object sender, RoutedEventArgs e)
