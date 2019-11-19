@@ -1,12 +1,53 @@
 ﻿<Window x:Class="tableshop.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:tableshop"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" WindowState="Maximized"
+        Loaded="Window_Loaded">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition/>
+    </Grid.RowDefinitions>
+
     <Grid>
-        
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition/>
+        <ColumnDefinition Width="Auto"/>
+      </Grid.ColumnDefinitions>
+
+      <Label Content="Table File"/>
+      <TextBox Grid.Column="1"/>
+      <Button Content="Browse..." Grid.Column="2"/>
     </Grid>
+
+    <ToolBar Grid.Row="1">
+      <Button Content="Save as..."/>
+      <Separator/>
+      <Button Content="Insert above" Click="InsertAbove"/>
+      <Button Content="Insert below" Click="InsertBelow"/>
+      <Button Content="Remove row" Click="RemoveRow"/>
+    </ToolBar>
+
+    <DataGrid Name="dataGrid" ItemsSource="{Binding}" Grid.Row="2">
+      <DataGrid.Columns>
+        <DataGridTextColumn Binding="{Binding Category}" ClipboardContentBinding="{x:Null}" Header="Category"/>
+        <DataGridTextColumn Binding="{Binding FieldName}" ClipboardContentBinding="{x:Null}" Header="Field Name"/>
+        <DataGridTemplateColumn ClipboardContentBinding="{x:Null}" Header="Description">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <TextBox AcceptsReturn="True"/>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+        </DataGridTemplateColumn>
+        <DataGridTextColumn Binding="{Binding Size}" ClipboardContentBinding="{x:Null}" Header="Size"/>
+        <DataGridCheckBoxColumn Binding="{Binding Public}" ClipboardContentBinding="{x:Null}" Header="Public"/>
+        <DataGridTextColumn Binding="{Binding Comment}" ClipboardContentBinding="{x:Null}" Header="Comment"/>
+      </DataGrid.Columns>
+    </DataGrid>
+  </Grid>
 </Window>
