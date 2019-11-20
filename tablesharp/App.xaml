@@ -1,7 +1,7 @@
-﻿<Application x:Class="tableshop.App"
+﻿<Application x:Class="tablesharp.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:tableshop"
+             xmlns:local="clr-namespace:tablesharp"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          

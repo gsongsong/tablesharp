@@ -1,7 +1,7 @@
 ﻿using System;
 using Excel = Microsoft.Office.Interop.Excel;
 
-namespace tableshop
+namespace tablesharp
 {
   class Item
   {

@@ -7,7 +7,7 @@ using System.Text.Json;
 using System.Windows;
 using Excel = Microsoft.Office.Interop.Excel;
 
-namespace tableshop
+namespace tablesharp
 {
   /// <summary>
   /// Interaction logic for MainWindow.xaml
