@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -75,20 +76,11 @@ namespace tableshop
         app.Workbooks.Add();
         Excel._Worksheet ws = app.ActiveSheet;
         Excel.Range cells = ws.Cells;
-        int row = 1;
-        int col = 1;
-        cells[row, col++] = "Category";
-        cells[row, col++] = "Field Name";
-        cells[row, col++] = "Description";
-        cells[row, col++] = "Size";
+        Tuple<int, int> addr = new Tuple<int, int>(1, 1);
+        addr = Item.FillHeader(cells, addr);
         foreach (Item item in dataTable)
         {
-          row++;
-          col = 1;
-          cells[row, col++] = item.Category;
-          cells[row, col++] = item.IsPublic ? item.FieldName : "Reserved";
-          cells[row, col++] = item.IsPublic ? item.Description : "";
-          cells[row, col++] = item.Size;
+          addr = item.FillRow(cells, new Tuple<int, int>(addr.Item1 + 1, 1));
         }
         app.Visible = true;
       }

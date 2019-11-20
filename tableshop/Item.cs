@@ -1,7 +1,32 @@
-﻿namespace tableshop
+﻿using System;
+using Excel = Microsoft.Office.Interop.Excel;
+
+namespace tableshop
 {
   class Item
   {
+    public static Tuple<int, int> FillHeader(Excel.Range cells, Tuple<int, int> addr)
+    {
+      int row = addr.Item1;
+      int col = addr.Item2;
+      cells[row, col++] = "Category";
+      cells[row, col++] = "Field Name";
+      cells[row, col++] = "Description";
+      cells[row, col] = "Size";
+      return new Tuple<int, int>(row, col);
+    }
+
+    public Tuple<int, int> FillRow(Excel.Range cells, Tuple<int, int> address)
+    {
+      int row = address.Item1;
+      int col = address.Item2;
+      cells[row, col++] = Category;
+      cells[row, col++] = IsPublic ? FieldName : "Reserved";
+      cells[row, col++] = IsPublic ? Description : "";
+      cells[row, col] = Size;
+      return new Tuple<int, int>(row, col);
+    }
+
     public Item(string category, string fieldName, string description, int size, bool isPublic, string comment)
     {
       Category = category;
