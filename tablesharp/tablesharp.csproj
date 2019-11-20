@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{B9393405-A73D-479D-B1B0-A9F2548C2DBB}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>tableshop</RootNamespace>
-    <AssemblyName>tableshop</AssemblyName>
+    <RootNamespace>tablesharp</RootNamespace>
+    <AssemblyName>tablesharp</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

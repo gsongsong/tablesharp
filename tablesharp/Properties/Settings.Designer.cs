@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace tableshop.Properties
+namespace tablesharp.Properties
 {
 
 

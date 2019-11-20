@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.902
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tableshop", "tableshop\tableshop.csproj", "{B9393405-A73D-479D-B1B0-A9F2548C2DBB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tablesharp", "tablesharp\tablesharp.csproj", "{B9393405-A73D-479D-B1B0-A9F2548C2DBB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
