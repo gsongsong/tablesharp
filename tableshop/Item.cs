@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Controls;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace tableshop
@@ -11,6 +12,8 @@ namespace tableshop
     public int Size { get; set; }
     public bool IsPublic { get; set; }
     public string Comment { get; set; }
+
+    private static bool DataGridConfigured;
 
     public Item(string category, string fieldName, string description, int size, bool isPublic, string comment)
     {
@@ -30,6 +33,13 @@ namespace tableshop
       Size = int.MinValue;
       IsPublic = false;
       Comment = "";
+    }
+
+    public static void ConfigureDataGrid(DataGrid dataGrid)
+    {
+      if (DataGridConfigured) return;
+      // TODO
+      DataGridConfigured = true;
     }
 
     public static Tuple<int, int> FillHeader(Excel.Range cells, Tuple<int, int> addr)
