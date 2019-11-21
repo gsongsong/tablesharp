@@ -20,10 +20,17 @@ namespace tablesharp
       InitializeComponent();
     }
 
+    private void BindData(ObservableCollection<Item> dataTable)
+    {
+      dataGrid.DataContext = dataTable;
+      dataGrid.ItemsSource = dataTable;
+    }
+
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
+      Item.ConfigureDataGrid(dataGrid);
       dataTable = new ObservableCollection<Item>();
-      dataGrid.DataContext = dataTable;
+      BindData(dataTable);
     }
 
     private void Open(object sender, RoutedEventArgs e)
@@ -40,7 +47,7 @@ namespace tablesharp
         string json = File.ReadAllText(openFileDialog.FileName);
         List<Item> list = JsonSerializer.Deserialize<List<Item>>(json);
         dataTable = new ObservableCollection<Item>(list);
-        dataGrid.DataContext = dataTable;
+        BindData(dataTable);
       }
     }
 
