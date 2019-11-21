@@ -35,6 +35,10 @@ namespace tablesharp
       Comment = "";
     }
 
+    public static void OnAutoGeneratingColumn(DataGridAutoGeneratingColumnEventArgs e)
+    {
+    }
+
     public static void ConfigureDataGrid(DataGrid dataGrid)
     {
       if (DataGridConfigured) return;
