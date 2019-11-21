@@ -34,33 +34,6 @@
       <Button Content="Remove row" Click="RemoveRow"/>
     </ToolBar>
 
-    <DataGrid Name="dataGrid" ItemsSource="{Binding}" AutoGenerateColumns="False" Grid.Row="2">
-      <DataGrid.Columns>
-        <DataGridTextColumn Binding="{Binding Category, UpdateSourceTrigger=PropertyChanged}" ClipboardContentBinding="{x:Null}" Header="Category" CanUserSort="False"/>
-        <DataGridTextColumn Binding="{Binding FieldName, UpdateSourceTrigger=PropertyChanged}" ClipboardContentBinding="{x:Null}" Header="Field Name" CanUserSort="False"/>
-        <DataGridTemplateColumn ClipboardContentBinding="{x:Null}" Header="Description" MinWidth="200">
-          <DataGridTemplateColumn.CellTemplate>
-            <DataTemplate>
-              <TextBox Text="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True"/>
-            </DataTemplate>
-          </DataGridTemplateColumn.CellTemplate>
-        </DataGridTemplateColumn>
-        <DataGridTextColumn Binding="{Binding Size, UpdateSourceTrigger=PropertyChanged}" ClipboardContentBinding="{x:Null}" Header="Size" CanUserSort="False"/>
-        <DataGridTemplateColumn ClipboardContentBinding="{x:Null}" Header="Public">
-          <DataGridTemplateColumn.CellTemplate>
-            <DataTemplate>
-              <CheckBox IsChecked="{Binding Path=IsPublic, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
-            </DataTemplate>
-          </DataGridTemplateColumn.CellTemplate>
-        </DataGridTemplateColumn>
-        <DataGridTemplateColumn ClipboardContentBinding="{x:Null}" Header="Comment" MinWidth="200">
-          <DataGridTemplateColumn.CellTemplate>
-            <DataTemplate>
-              <TextBox Text="{Binding Path=Comment, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True"/>
-            </DataTemplate>
-          </DataGridTemplateColumn.CellTemplate>
-        </DataGridTemplateColumn>
-      </DataGrid.Columns>
-    </DataGrid>
+    <DataGrid Name="dataGrid" Grid.Row="2"/>
   </Grid>
 </Window>
