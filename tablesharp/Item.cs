@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace tablesharp
@@ -37,6 +39,27 @@ namespace tablesharp
 
     public static void OnAutoGeneratingColumn(DataGridAutoGeneratingColumnEventArgs e)
     {
+      if (e.PropertyName == "Description")
+      {
+        Binding binding = new Binding("Description")
+        {
+          Mode = BindingMode.TwoWay,
+        };
+        FrameworkElementFactory textFactory = new FrameworkElementFactory(typeof(TextBox));
+        textFactory.SetBinding(TextBox.TextProperty, binding);
+        textFactory.SetValue(TextBox.AcceptsReturnProperty, true);
+        DataTemplate textTemplate = new DataTemplate
+        {
+          VisualTree = textFactory,
+        };
+        DataGridTemplateColumn column = new DataGridTemplateColumn
+        {
+          CellTemplate = textTemplate,
+          Header = "Description",
+        };
+        e.Column = column;
+      }
+      e.Column.CanUserSort = false;
     }
 
     public static void ConfigureDataGrid(DataGrid dataGrid)
