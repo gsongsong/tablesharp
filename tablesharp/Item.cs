@@ -39,25 +39,16 @@ namespace tablesharp
 
     public static void OnAutoGeneratingColumn(DataGridAutoGeneratingColumnEventArgs e)
     {
-      if (e.PropertyName == "Description")
+      switch (e.PropertyName)
       {
-        Binding binding = new Binding("Description")
-        {
-          Mode = BindingMode.TwoWay,
-        };
-        FrameworkElementFactory textFactory = new FrameworkElementFactory(typeof(TextBox));
-        textFactory.SetBinding(TextBox.TextProperty, binding);
-        textFactory.SetValue(TextBox.AcceptsReturnProperty, true);
-        DataTemplate textTemplate = new DataTemplate
-        {
-          VisualTree = textFactory,
-        };
-        DataGridTemplateColumn column = new DataGridTemplateColumn
-        {
-          CellTemplate = textTemplate,
-          Header = "Description",
-        };
-        e.Column = column;
+        case "Description":
+          e.Column = Helper.MultilineTextColumn("Description", "Description");
+          break;
+        case "IsPublic":
+          e.Column = Helper.CheckboxColumn("Public", "IsPublic");
+          break;
+        default:
+          break;
       }
       e.Column.CanUserSort = false;
     }
