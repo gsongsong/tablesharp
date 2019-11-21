@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Text.Json;
 using System.Windows;
+using System.Windows.Controls;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace tablesharp
@@ -118,6 +119,11 @@ namespace tablesharp
       if (selectedIndex >= dataTable.Count) return;
       dataGrid.SelectedIndex = selectedIndex;
       dataGrid.Focus();
+    }
+
+    private void OnAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+    {
+      Item.OnAutoGeneratingColumn(e);
     }
   }
 }

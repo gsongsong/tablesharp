@@ -35,6 +35,22 @@ namespace tablesharp
       Comment = "";
     }
 
+    public static void OnAutoGeneratingColumn(DataGridAutoGeneratingColumnEventArgs e)
+    {
+      switch (e.PropertyName)
+      {
+        case "Description":
+          e.Column = Helper.MultilineTextColumn("Description", "Description");
+          break;
+        case "IsPublic":
+          e.Column = Helper.CheckboxColumn("Public", "IsPublic");
+          break;
+        default:
+          break;
+      }
+      e.Column.CanUserSort = false;
+    }
+
     public static void ConfigureDataGrid(DataGrid dataGrid)
     {
       if (DataGridConfigured) return;

@@ -34,6 +34,6 @@
       <Button Content="Remove row" Click="RemoveRow"/>
     </ToolBar>
 
-    <DataGrid Name="dataGrid" Grid.Row="2"/>
+    <DataGrid Name="dataGrid" AutoGeneratingColumn="OnAutoGeneratingColumn" Grid.Row="2"/>
   </Grid>
 </Window>
