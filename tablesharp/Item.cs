@@ -5,8 +5,6 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 namespace tablesharp
 {
-  enum InputType { Default, Checkbox, Multiline }
-
   class Item
   {
     // Define properties of each item
@@ -28,7 +26,7 @@ namespace tablesharp
       { "FieldName", new Property("Field name") },
       { "Description", new Property("Description", InputType.Multiline) },
       { "Size", new Property("Size") },
-      { "IsPublic", new Property("Public", InputType.Checkbox) },
+      { "IsPublic", new Property("Public") },
       { "Comment", new Property("Comment", InputType.Multiline) },
     };
 

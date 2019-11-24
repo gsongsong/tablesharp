@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -49,20 +50,20 @@ namespace tablesharp
 
     public static void OnAutoGeneratingColumn(DataGridAutoGeneratingColumnEventArgs e, Dictionary<string, Property> itemTypes)
     {
-      if (itemTypes.TryGetValue(e.PropertyName, out Property itemProperty))
+      bool propertyFound = itemTypes.TryGetValue(e.PropertyName, out Property property);
+      string header = propertyFound ? property.Header : e.PropertyName;
+      PropertyInfo propertyInfo = typeof(Item).GetProperty(e.PropertyName);
+      if (propertyInfo.PropertyType == typeof(bool))
       {
-        switch (itemProperty.InputType)
-        {
-          case InputType.Checkbox:
-            e.Column = Helper.CheckboxColumn(itemProperty.Header, e.PropertyName);
-            break;
-          case InputType.Multiline:
-            e.Column = Helper.MultilineTextColumn(itemProperty.Header, e.PropertyName);
-            break;
-          default:
-            e.Column.Header = itemProperty.Header;
-            break;
-        }
+        e.Column = Helper.CheckboxColumn(header, e.PropertyName);
+      }
+      else if (property.InputType == InputType.Multiline)
+      {
+        e.Column = Helper.MultilineTextColumn(header, e.PropertyName);
+      }
+      else
+      {
+        e.Column.Header = header;
       }
       e.Column.CanUserSort = false;
     }

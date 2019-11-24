@@ -1,5 +1,7 @@
 ﻿namespace tablesharp
 {
+  enum InputType { Default, Multiline }
+
   class Property
   {
     public string Header { get; }
