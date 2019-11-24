@@ -81,6 +81,7 @@ namespace tablesharp
       {
         addr = item.FillRow(cells, new Tuple<int, int>(addr.Item1 + 1, 1));
       }
+      cells.Columns.AutoFit();
       app.Visible = true;
     }
 
