@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Controls;
 using Excel = Microsoft.Office.Interop.Excel;
 
@@ -6,6 +7,7 @@ namespace tablesharp
 {
   class Item
   {
+    // Define properties of each item
     public string Category { get; set; }
     public string FieldName { get; set; }
     public string Description { get; set; }
@@ -13,8 +15,22 @@ namespace tablesharp
     public bool IsPublic { get; set; }
     public string Comment { get; set; }
 
-    private static bool DataGridConfigured;
+    // Define Header and input type for each property
+    // Header will be shown in table editing scene and exported spreadsheet
+    // If a property shall support multiline text, use `InputType.Multiline`
+    // If a property shall support yes/no or true/false, use `InputType.Checkbox`
+    // Otherwise, `InputType` argument is not required
+    private static readonly Dictionary<string, Property> itemTypes = new Dictionary<string, Property>
+    {
+      { "Category", new Property("Category") },
+      { "FieldName", new Property("Field name") },
+      { "Description", new Property("Description", InputType.Multiline) },
+      { "Size", new Property("Size") },
+      { "IsPublic", new Property("Public") },
+      { "Comment", new Property("Comment", InputType.Multiline) },
+    };
 
+    // Define item constructor
     public Item(string category, string fieldName, string description, int size, bool isPublic, string comment)
     {
       Category = category;
@@ -25,6 +41,7 @@ namespace tablesharp
       Comment = comment;
     }
 
+    // Define default value for each property
     public Item()
     {
       Category = "";
@@ -33,29 +50,6 @@ namespace tablesharp
       Size = int.MinValue;
       IsPublic = false;
       Comment = "";
-    }
-
-    public static void OnAutoGeneratingColumn(DataGridAutoGeneratingColumnEventArgs e)
-    {
-      switch (e.PropertyName)
-      {
-        case "Description":
-          e.Column = Helper.MultilineTextColumn("Description", "Description");
-          break;
-        case "IsPublic":
-          e.Column = Helper.CheckboxColumn("Public", "IsPublic");
-          break;
-        default:
-          break;
-      }
-      e.Column.CanUserSort = false;
-    }
-
-    public static void ConfigureDataGrid(DataGrid dataGrid)
-    {
-      if (DataGridConfigured) return;
-      // TODO
-      DataGridConfigured = true;
     }
 
     public static Tuple<int, int> FillHeader(Excel.Range cells, Tuple<int, int> addr)
@@ -78,6 +72,12 @@ namespace tablesharp
       cells[row, col++] = IsPublic ? Description : "";
       cells[row, col] = Size;
       return new Tuple<int, int>(row, col);
+    }
+
+    // DO NOT EDIT BELOW
+    public static void OnAutoGeneratingColumn(DataGridAutoGeneratingColumnEventArgs e)
+    {
+      Helper.OnAutoGeneratingColumn(e, itemTypes);
     }
   }
 }

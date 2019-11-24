@@ -29,7 +29,6 @@ namespace tablesharp
 
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
-      Item.ConfigureDataGrid(dataGrid);
       dataTable = new ObservableCollection<Item>();
       BindData(dataTable);
     }

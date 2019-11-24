@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Reflection;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
@@ -44,6 +46,26 @@ namespace tablesharp
       FrameworkElementFactory checkboxFactory = new FrameworkElementFactory(typeof(CheckBox));
       checkboxFactory.SetBinding(CheckBox.IsCheckedProperty, binding);
       return TemplateColumnHelper(header, checkboxFactory);
+    }
+
+    public static void OnAutoGeneratingColumn(DataGridAutoGeneratingColumnEventArgs e, Dictionary<string, Property> itemTypes)
+    {
+      bool propertyFound = itemTypes.TryGetValue(e.PropertyName, out Property property);
+      string header = propertyFound ? property.Header : e.PropertyName;
+      PropertyInfo propertyInfo = typeof(Item).GetProperty(e.PropertyName);
+      if (propertyInfo.PropertyType == typeof(bool))
+      {
+        e.Column = Helper.CheckboxColumn(header, e.PropertyName);
+      }
+      else if (property.InputType == InputType.Multiline)
+      {
+        e.Column = Helper.MultilineTextColumn(header, e.PropertyName);
+      }
+      else
+      {
+        e.Column.Header = header;
+      }
+      e.Column.CanUserSort = false;
     }
   }
 }
