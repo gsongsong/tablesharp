@@ -56,6 +56,7 @@ namespace tablesharp
     {
       int row = addr.Item1;
       int col = addr.Item2;
+      cells[row, col].EntireRow.Font.Bold = true;
       cells[row, col++] = "Category";
       cells[row, col++] = "Field Name";
       cells[row, col++] = "Description";
