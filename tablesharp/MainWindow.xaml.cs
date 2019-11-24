@@ -81,6 +81,8 @@ namespace tablesharp
       {
         addr = item.FillRow(cells, new Tuple<int, int>(addr.Item1 + 1, 1));
       }
+      cells.Style.VerticalAlignment = Excel.XlVAlign.xlVAlignTop;
+      cells.Rows.AutoFit();
       cells.Columns.AutoFit();
       app.Visible = true;
     }
