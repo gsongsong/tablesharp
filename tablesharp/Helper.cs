@@ -64,6 +64,8 @@ namespace tablesharp
       else
       {
         e.Column.Header = header;
+        Binding binding = (e.Column as DataGridTextColumn).Binding as Binding;
+        binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
       }
       e.Column.CanUserSort = false;
     }
