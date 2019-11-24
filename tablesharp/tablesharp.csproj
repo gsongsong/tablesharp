@@ -96,6 +96,7 @@
     </Compile>
     <Compile Include="Helper.cs" />
     <Compile Include="Item.cs" />
+    <Compile Include="Property.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
