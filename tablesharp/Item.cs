@@ -13,7 +13,6 @@ namespace tablesharp
     public bool IsPublic { get; set; }
     public string Comment { get; set; }
 
-    private static bool DataGridConfigured;
 
     public Item(string category, string fieldName, string description, int size, bool isPublic, string comment)
     {
