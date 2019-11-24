@@ -56,10 +56,14 @@ namespace tablesharp
     {
       int row = addr.Item1;
       int col = addr.Item2;
+      Excel.Range start = cells[row, col];
+      cells[row, col].EntireRow.Font.Bold = true;
       cells[row, col++] = "Category";
       cells[row, col++] = "Field Name";
       cells[row, col++] = "Description";
       cells[row, col] = "Size";
+      Excel.Range end = cells[row, col];
+      cells.Range[start, end].BorderAround2();
       return new Tuple<int, int>(row, col);
     }
 
@@ -67,10 +71,13 @@ namespace tablesharp
     {
       int row = address.Item1;
       int col = address.Item2;
+      Excel.Range start = cells[row, col];
       cells[row, col++] = Category;
       cells[row, col++] = IsPublic ? FieldName : "Reserved";
       cells[row, col++] = IsPublic ? Description : "";
       cells[row, col] = Size;
+      Excel.Range end = cells[row, col];
+      cells.Range[start, end].BorderAround2();
       return new Tuple<int, int>(row, col);
     }
 
