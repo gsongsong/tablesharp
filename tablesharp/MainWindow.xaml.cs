@@ -71,26 +71,17 @@ namespace tablesharp
 
     private void Export(object sender, RoutedEventArgs e)
     {
-      SaveFileDialog saveFileDialog = new SaveFileDialog
+      var app = new Excel.Application();
+      app.Workbooks.Add();
+      Excel._Worksheet ws = app.ActiveSheet;
+      Excel.Range cells = ws.Cells;
+      Tuple<int, int> addr = new Tuple<int, int>(1, 1);
+      addr = Item.FillHeader(cells, addr);
+      foreach (Item item in dataTable)
       {
-        DefaultExt = ".xlsx",
-        Filter = "Excel files (.xlsx)|*.xlsx",
-      };
-      bool? dialogResult = saveFileDialog.ShowDialog();
-      if (dialogResult == true)
-      {
-        var app = new Excel.Application();
-        app.Workbooks.Add();
-        Excel._Worksheet ws = app.ActiveSheet;
-        Excel.Range cells = ws.Cells;
-        Tuple<int, int> addr = new Tuple<int, int>(1, 1);
-        addr = Item.FillHeader(cells, addr);
-        foreach (Item item in dataTable)
-        {
-          addr = item.FillRow(cells, new Tuple<int, int>(addr.Item1 + 1, 1));
-        }
-        app.Visible = true;
+        addr = item.FillRow(cells, new Tuple<int, int>(addr.Item1 + 1, 1));
       }
+      app.Visible = true;
     }
 
     private void InsertAbove(object sender, RoutedEventArgs e)
