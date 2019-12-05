@@ -19,13 +19,13 @@ namespace tablesharp
 
     public static DataGridTemplateColumn TemplateColumnHelper(string header, FrameworkElementFactory factory)
     {
-      DataTemplate textTemplate = new DataTemplate
+      DataTemplate dataTemplate = new DataTemplate
       {
         VisualTree = factory,
       };
       DataGridTemplateColumn column = new DataGridTemplateColumn
       {
-        CellTemplate = textTemplate,
+        CellTemplate = dataTemplate,
         Header = header,
       };
       return column;
