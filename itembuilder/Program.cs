@@ -96,9 +96,9 @@ namespace tablesharp
     }}
 
     // DO NOT EDIT BELOW
-    public static void OnAutoGeneratingColumn(DataGridAutoGeneratingColumnEventArgs e)
+    public static void OnAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
     {{
-      Helper.OnAutoGeneratingColumn(e, itemTypes);
+      Helper.OnAutoGeneratingColumn(sender, e, itemTypes);
     }}
   }}
 }}";

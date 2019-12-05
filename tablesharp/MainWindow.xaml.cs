@@ -116,7 +116,7 @@ namespace tablesharp
 
     private void OnAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
     {
-      Item.OnAutoGeneratingColumn(e);
+      Item.OnAutoGeneratingColumn(sender, e);
     }
   }
 }

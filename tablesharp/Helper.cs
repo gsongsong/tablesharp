@@ -48,7 +48,7 @@ namespace tablesharp
       return TemplateColumnHelper(header, checkboxFactory);
     }
 
-    public static void OnAutoGeneratingColumn(DataGridAutoGeneratingColumnEventArgs e, Dictionary<string, Property> itemTypes)
+    public static void OnAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e, Dictionary<string, Property> itemTypes)
     {
       bool propertyFound = itemTypes.TryGetValue(e.PropertyName, out Property property);
       string header = propertyFound ? property.Header : e.PropertyName;
