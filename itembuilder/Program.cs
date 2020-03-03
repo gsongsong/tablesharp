@@ -50,8 +50,6 @@ namespace tablesharp
     // Define properties of each item
 {0}
 
-    private static int colMax;
-
     // Define Header and input type for each property
     // Header will be shown in table editing scene and exported spreadsheet
     // If a property shall support multiline text, use `InputType.Multiline`
@@ -78,12 +76,7 @@ namespace tablesharp
     {{
       int row = addr.Item1;
       int col = addr.Item2;
-      Excel.Range start = cells[row, col];
-      cells[row, col].EntireRow.Font.Bold = true;
 {5}
-      colMax = col - 1;
-      Excel.Range end = cells[row, col - 1];
-      DrawBorder(cells.Range[start, end]);
       return new Tuple<int, int>(row, col);
     }}
 
@@ -91,23 +84,8 @@ namespace tablesharp
     {{
       int row = address.Item1;
       int col = address.Item2;
-      Excel.Range start = cells[row, col];
-      Excel.Range end = cells[row, colMax];
-      DrawBorder(cells.Range[start, end]);
-      cells.Range[start, end].NumberFormat = ""@"";
 {6}
       return new Tuple<int, int>(row, col);
-    }}
-
-    private static void DrawBorder(Excel.Range range)
-    {{
-      Excel.Borders borders = range.Borders;
-      borders[Excel.XlBordersIndex.xlEdgeTop].LineStyle = Excel.XlLineStyle.xlContinuous;
-      borders[Excel.XlBordersIndex.xlEdgeBottom].LineStyle = Excel.XlLineStyle.xlContinuous;
-      borders[Excel.XlBordersIndex.xlEdgeLeft].LineStyle = Excel.XlLineStyle.xlContinuous;
-      borders[Excel.XlBordersIndex.xlEdgeRight].LineStyle = Excel.XlLineStyle.xlContinuous;
-      borders[Excel.XlBordersIndex.xlInsideHorizontal].LineStyle = Excel.XlLineStyle.xlContinuous;
-      borders[Excel.XlBordersIndex.xlInsideVertical].LineStyle = Excel.XlLineStyle.xlContinuous;
     }}
 
     // DO NOT EDIT BELOW

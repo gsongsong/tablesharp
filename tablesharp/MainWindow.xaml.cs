@@ -75,7 +75,9 @@ namespace tablesharp
       app.Workbooks.Add();
       Excel._Worksheet ws = app.ActiveSheet;
       Excel.Range cells = ws.Cells;
+      cells.NumberFormat = "@";
       Tuple<int, int> addr = new Tuple<int, int>(1, 1);
+      cells[1, 1].EntireRow.Font.Bold = true;
       addr = Item.FillHeader(cells, addr);
       foreach (Item item in dataTable)
       {
@@ -84,6 +86,16 @@ namespace tablesharp
       cells.Style.VerticalAlignment = Excel.XlVAlign.xlVAlignTop;
       cells.Rows.AutoFit();
       cells.Columns.AutoFit();
+      Excel.Range start = cells[1, 1];
+      Excel.Range end = cells[addr.Item1, addr.Item2 - 1];
+      Excel.Range range = cells.Range[start, end];
+      Excel.Borders borders = range.Borders;
+      borders[Excel.XlBordersIndex.xlEdgeTop].LineStyle = Excel.XlLineStyle.xlContinuous;
+      borders[Excel.XlBordersIndex.xlEdgeBottom].LineStyle = Excel.XlLineStyle.xlContinuous;
+      borders[Excel.XlBordersIndex.xlEdgeLeft].LineStyle = Excel.XlLineStyle.xlContinuous;
+      borders[Excel.XlBordersIndex.xlEdgeRight].LineStyle = Excel.XlLineStyle.xlContinuous;
+      borders[Excel.XlBordersIndex.xlInsideHorizontal].LineStyle = Excel.XlLineStyle.xlContinuous;
+      borders[Excel.XlBordersIndex.xlInsideVertical].LineStyle = Excel.XlLineStyle.xlContinuous;
       app.Visible = true;
     }
 
