@@ -27,6 +27,7 @@
 
     <ToolBar Grid.Row="1">
       <Button Content="Save as..." Click="SaveAs"/>
+      <ComboBox x:Name="ExportFlavor" />
       <Button Content="Export..." Click="Export"/>
       <Separator/>
       <Button Content="Insert above" Click="InsertAbove"/>

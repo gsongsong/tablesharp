@@ -97,6 +97,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="FlavorData.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Property.cs" />

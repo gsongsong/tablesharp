@@ -6,6 +6,7 @@ using System.IO;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace tablesharp
@@ -19,6 +20,12 @@ namespace tablesharp
     public MainWindow()
     {
       InitializeComponent();
+      ExportFlavor.DataContext = new FlavorData();
+      ExportFlavor.SetBinding(ComboBox.ItemsSourceProperty, new Binding("List"));
+      ExportFlavor.SetBinding(ComboBox.SelectedItemProperty, new Binding("Selected")
+      {
+        Mode = BindingMode.TwoWay,
+      });
     }
 
     private void BindData(ObservableCollection<Item> dataTable)
