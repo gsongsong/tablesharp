@@ -77,6 +77,7 @@ namespace tablesharp
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Windows.Controls;
 using Excel = Microsoft.Office.Interop.Excel;
 
