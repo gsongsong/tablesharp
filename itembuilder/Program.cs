@@ -130,6 +130,19 @@ namespace tablesharp
     {{
       Helper.OnAutoGeneratingColumn(sender, e, itemTypes);
     }}
+
+    public bool IsFor(string flavor)
+    {{
+      PropertyInfo propertyInfo = GetType().GetProperty(flavor);
+      if (propertyInfo == null)
+      {{
+        return true;
+      }}
+      else
+      {{
+        return (bool) propertyInfo.GetValue(this, null);
+      }}
+    }}
   }}
 }}
 ";
