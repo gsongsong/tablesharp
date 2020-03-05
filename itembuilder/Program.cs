@@ -117,7 +117,7 @@ namespace tablesharp
       return new Tuple<int, int>(row, col);
     }}
 
-    public Tuple<int, int> FillRow(Excel.Range cells, Tuple<int, int> address)
+    public Tuple<int, int> FillRow(Excel.Range cells, Tuple<int, int> address, string flavor)
     {{
       int row = address.Item1;
       int col = address.Item2;
@@ -141,20 +141,52 @@ namespace tablesharp
       StreamReader streamReader = new StreamReader(stream);
       string json = streamReader.ReadToEnd();
       Definition definition = JsonSerializer.Deserialize<Definition>(json);
+      List<string> flavors = definition.Flavors;
+      List<string> flavorsExceptFirst = flavors.GetRange(1, flavors.Count - 1);
       List<Item> items = definition.Items;
 
-      string flavors = string.Join("\n", definition.Flavors.ConvertAll(flavor => string.Format(templateFlavorItem, flavor)));
-      string flavorDataClass = string.Format(templateFlavorDataClass, flavors, definition.Flavors[0]);
+      string flavorsItem = string.Join("\n", definition.Flavors.ConvertAll(flavor => string.Format(templateFlavorItem, flavor)));
+      string flavorDataClass = string.Format(templateFlavorDataClass, flavorsItem, definition.Flavors[0]);
       Console.WriteLine(flavorDataClass);
 
-      string members = string.Join("\n", items.ConvertAll(item => string.Format(templateMember, item.Type.Value, item.Name)));
-      string dictItems = string.Join("\n", items.ConvertAll(item => item.Type.Multiline ?
-        string.Format(templateDicItemMultiline, item.Name, item.Display.Header) :
-        string.Format(templateDictItem, item.Name, item.Display.Header)
-      ));
-      string constructorArgs = string.Join(", ", items.ConvertAll(item => string.Format(templateConsructorArg, item.Type.Value, item.Name.ToLower())));
-      string constructors = string.Join("\n", items.ConvertAll(item => string.Format(templateConstructor, item.Name, item.Name.ToLower())));
-      string constructorsDefault = string.Join("\n", items.ConvertAll(item => string.Format(templateConstructor, item.Name, item.Type.Default)));
+      List<string> memberList = new List<string>
+      {
+        string.Join("\n", items.ConvertAll(item => string.Format(templateMember, item.Type.Value, item.Name))),
+        string.Join("\n", flavorsExceptFirst.ConvertAll(flavor => string.Format(templateMember, "bool", flavor))),
+      };
+      string members = string.Join("\n", memberList);
+
+      List<string> dictItemList = new List<string>
+      {
+        string.Join("\n", items.ConvertAll(item => item.Type.Multiline ?
+          string.Format(templateDicItemMultiline, item.Name, item.Display.Header) :
+          string.Format(templateDictItem, item.Name, item.Display.Header)
+        )),
+        string.Join("\n", flavorsExceptFirst.ConvertAll(flavor => string.Format(templateDictItem, flavor, flavor))),
+      };
+      string dictItems = string.Join("\n", dictItemList);
+
+      List<string> consturctorArgList = new List<string>
+      {
+        string.Join(", ", items.ConvertAll(item => string.Format(templateConsructorArg, item.Type.Value, item.Name.ToLower()))),
+        string.Join(", ", flavorsExceptFirst.ConvertAll(flavor => string.Format(templateConsructorArg, "bool", flavor.ToLower()))),
+      };
+      string constructorArgs = string.Join(", ", consturctorArgList);
+
+      List<string> constructorList = new List<string>
+      {
+        string.Join("\n", items.ConvertAll(item => string.Format(templateConstructor, item.Name, item.Name.ToLower()))),
+        string.Join("\n", flavorsExceptFirst.ConvertAll(flavor => string.Format(templateConstructor, flavor, flavor.ToLower()))),
+      };
+      string constructors = string.Join("\n", constructorList);
+
+      List<string> constructorDefaulList = new List<string>
+      {
+        string.Join("\n", items.ConvertAll(item => string.Format(templateConstructor, item.Name, item.Type.Default))),
+        string.Join("\n", flavorsExceptFirst.ConvertAll(flavor => string.Format(templateConstructor, flavor, "true"))),
+      };
+      string constructorsDefault = string.Join("\n", constructorDefaulList);
+
       List<Item> itemsToDisplay = items.FindAll(item => item.Display.Enabled);
       string cellsHeader = string.Join("\n", itemsToDisplay.ConvertAll(item => string.Format(templateCellHeader, item.Display.Header)));
       string cellsRow = string.Join("\n", itemsToDisplay.ConvertAll(item => string.Format(templateCellRow, item.Display.Expression)));

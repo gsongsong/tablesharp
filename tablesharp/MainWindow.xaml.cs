@@ -78,6 +78,7 @@ namespace tablesharp
 
     private void Export(object sender, RoutedEventArgs e)
     {
+      string flavor = ExportFlavor.SelectedItem.ToString();
       var app = new Excel.Application();
       app.Workbooks.Add();
       Excel._Worksheet ws = app.ActiveSheet;
@@ -88,7 +89,7 @@ namespace tablesharp
       addr = Item.FillHeader(cells, addr);
       foreach (Item item in dataTable)
       {
-        addr = item.FillRow(cells, new Tuple<int, int>(addr.Item1 + 1, 1));
+        addr = item.FillRow(cells, new Tuple<int, int>(addr.Item1 + 1, 1), flavor);
       }
       cells.Style.VerticalAlignment = Excel.XlVAlign.xlVAlignTop;
       cells.Rows.AutoFit();
