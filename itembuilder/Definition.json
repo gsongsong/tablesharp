@@ -1,0 +1,87 @@
+﻿{
+  "Flavors": [
+    "No Flavor",
+    "FlavorFirst",
+    "FlavorSecond"
+  ],
+  "Items": [
+    {
+      "Name": "Category",
+      "Type": {
+        "Value": "string",
+        "Default": "\"\"",
+        "Multiline": false
+      },
+      "Display": {
+        "Enabled": true,
+        "Header": "Category",
+        "Expression": "Category"
+      }
+    },
+    {
+      "Name": "FieldName",
+      "Type": {
+        "Value": "string",
+        "Default": "\"\"",
+        "Multiline": false
+      },
+      "Display": {
+        "Enabled": true,
+        "Header": "Field name",
+        "Expression": "IsPublic ? FieldName : \"Reserved\""
+      }
+    },
+    {
+      "Name": "Description",
+      "Type": {
+        "Value": "string",
+        "Default": "\"\"",
+        "Multiline": true
+      },
+      "Display": {
+        "Enabled": true,
+        "Header": "Description",
+        "Expression": "IsPublic ? Description : \"\""
+      }
+    },
+    {
+      "Name": "Size",
+      "Type": {
+        "Value": "int",
+        "Default": "int.MinValue",
+        "Multiline": false
+      },
+      "Display": {
+        "Enabled": true,
+        "Header": "Size",
+        "Expression": "Size"
+      }
+    },
+    {
+      "Name": "IsPublic",
+      "Type": {
+        "Value": "bool",
+        "Default": "true",
+        "Multiline": false
+      },
+      "Display": {
+        "Enabled": false,
+        "Header": "Public",
+        "Expression": ""
+      }
+    },
+    {
+      "Name": "Comment",
+      "Type": {
+        "Value": "string",
+        "Default": "\"\"",
+        "Multiline": true
+      },
+      "Display": {
+        "Enabled": true,
+        "Header": "Comment",
+        "Expression": "Comment"
+      }
+    }
+  ]
+}
