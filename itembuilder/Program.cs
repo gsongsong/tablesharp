@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text.Json;
@@ -67,8 +66,7 @@ namespace tablesharp
   }}
 }}
 ";
-    private static readonly string templateItemClass = @"
-/**
+    private static readonly string templateItemClass = @"/**
  * Item.cs
  */
 // THIS IS AUTO-GENERATED CLASS DEFINITION
@@ -150,6 +148,11 @@ namespace tablesharp
 
     static void Main(string[] args)
     {
+      string solutionPath = SolutionPath();
+      string tablesharpPath = Path.Combine(solutionPath, "tablesharp");
+      string flavorDataPath = Path.Combine(tablesharpPath, "FlavorData.cs");
+      string itemPath = Path.Combine(tablesharpPath, "Item.cs");
+
       Assembly assembly = Assembly.GetExecutingAssembly();
       Stream stream = assembly.GetManifestResourceStream("itembuilder.Definition.json");
       StreamReader streamReader = new StreamReader(stream);
@@ -161,7 +164,7 @@ namespace tablesharp
 
       string flavorsItem = string.Join("\n", definition.Flavors.ConvertAll(flavor => string.Format(templateFlavorItem, flavor)));
       string flavorDataClass = string.Format(templateFlavorDataClass, flavorsItem, definition.Flavors[0]);
-      Console.WriteLine(flavorDataClass);
+      File.WriteAllText(flavorDataPath, flavorDataClass);
 
       List<string> memberList = new List<string>
       {
@@ -205,7 +208,18 @@ namespace tablesharp
       string cellsHeader = string.Join("\n", itemsToDisplay.ConvertAll(item => string.Format(templateCellHeader, item.Display.Header)));
       string cellsRow = string.Join("\n", itemsToDisplay.ConvertAll(item => string.Format(templateCellRow, item.Display.Expression)));
       string itemClass = string.Format(templateItemClass, members, dictItems, constructorArgs, constructors, constructorsDefault, cellsHeader, cellsRow);
-      Console.WriteLine(itemClass);
+      File.WriteAllText(itemPath, itemClass);
+    }
+
+    static string SolutionPath()
+    {
+      // https://stackoverflow.com/questions/19001423/getting-path-to-the-parent-folder-of-the-solution-file-using-c-sharp
+      DirectoryInfo directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory());
+      while (directoryInfo.GetFiles("*.sln").Length == 0)
+      {
+        directoryInfo = directoryInfo.Parent;
+      }
+      return directoryInfo.FullName;
     }
   }
 }
