@@ -137,4 +137,7 @@
     <Resource Include="table-cells.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>$(SolutionDir)itembuilder\bin\Debug\netcoreapp3.0\itembuilder.exe</PreBuildEvent>
+  </PropertyGroup>
 </Project>
