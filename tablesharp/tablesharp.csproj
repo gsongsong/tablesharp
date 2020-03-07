@@ -139,6 +139,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>$(SolutionDir)itembuilder\bin\Debug\netcoreapp3.0\itembuilder.exe $(ProjectDir)</PreBuildEvent>
+    <PreBuildEvent>$(SolutionDir)itembuilder\bin\$(ConfigurationName)\netcoreapp3.0\itembuilder.exe $(ProjectDir)</PreBuildEvent>
   </PropertyGroup>
 </Project>
