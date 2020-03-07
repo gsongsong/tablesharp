@@ -148,13 +148,13 @@ namespace tablesharp
 
     static void Main(string[] args)
     {
-      string solutionPath = SolutionPath();
-      string tablesharpPath = Path.Combine(solutionPath, "tablesharp");
+      string tablesharpPath = args[0];
+      string definitionPath = Path.Combine(tablesharpPath, "Definition.json");
       string flavorDataPath = Path.Combine(tablesharpPath, "FlavorData.cs");
       string itemPath = Path.Combine(tablesharpPath, "Item.cs");
 
       Assembly assembly = Assembly.GetExecutingAssembly();
-      Stream stream = assembly.GetManifestResourceStream("itembuilder.Definition.json");
+      FileStream stream = new FileStream(definitionPath, FileMode.Open);
       StreamReader streamReader = new StreamReader(stream);
       string json = streamReader.ReadToEnd();
       Definition definition = JsonSerializer.Deserialize<Definition>(json);
@@ -209,17 +209,6 @@ namespace tablesharp
       string cellsRow = string.Join("\n", itemsToDisplay.ConvertAll(item => string.Format(templateCellRow, item.Display.Expression)));
       string itemClass = string.Format(templateItemClass, members, dictItems, constructorArgs, constructors, constructorsDefault, cellsHeader, cellsRow);
       File.WriteAllText(itemPath, itemClass);
-    }
-
-    static string SolutionPath()
-    {
-      // https://stackoverflow.com/questions/19001423/getting-path-to-the-parent-folder-of-the-solution-file-using-c-sharp
-      DirectoryInfo directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory());
-      while (directoryInfo.GetFiles("*.sln").Length == 0)
-      {
-        directoryInfo = directoryInfo.Parent;
-      }
-      return directoryInfo.FullName;
     }
   }
 }
