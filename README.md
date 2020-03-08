@@ -17,8 +17,9 @@ To be updated
 
 1. Open the solution `tablesharp.sln`
 1. Customize item properties
-   1. Open `Definition.json` under the project `tablesharp`
-   1. Define `Flavors` and `Items`. See below for the entire structure
+   1. Copy `Definition.example.json` to `Definition.json`
+   1. Define `Flavors` and `Items` in `Definition.json`
+      - See below for the entire structure
 1. Build `tablesharp` and use it
 
 
