@@ -16,13 +16,13 @@
     <Grid>
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="Auto"/>
-        <ColumnDefinition/>
         <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition/>
       </Grid.ColumnDefinitions>
 
-      <Label Content="Table File:"/>
-      <Label Name="filename" Grid.Column="1"/>
-      <Button Content="Browse..." Click="Open" Grid.Column="2"/>
+      <Button Content="Browse..." Click="Open"/>
+      <Label Content="File:" Grid.Column="1"/>
+      <Label Name="filename" Grid.Column="2"/>
     </Grid>
 
     <ToolBar Grid.Row="1">
