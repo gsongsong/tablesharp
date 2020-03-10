@@ -35,6 +35,6 @@
       <Button Content="Remove row" Click="RemoveRow"/>
     </ToolBar>
 
-    <DataGrid Name="dataGrid" AutoGeneratingColumn="OnAutoGeneratingColumn" Grid.Row="2" SelectionMode="Single" AlternatingRowBackground="#FFEEEEEE" GridLinesVisibility="Vertical"/>
+    <DataGrid Name="dataGrid" AutoGeneratingColumn="OnAutoGeneratingColumn" Grid.Row="2" SelectionMode="Single" AlternatingRowBackground="#FFEEEEEE" GridLinesVisibility="Vertical" CanUserDeleteRows="False"/>
   </Grid>
 </Window>
