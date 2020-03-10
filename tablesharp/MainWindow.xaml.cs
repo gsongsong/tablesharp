@@ -73,6 +73,7 @@ namespace tablesharp
           WriteIndented = true,
         });
         File.WriteAllText(saveFileDialog.FileName, json);
+        filename.Content = saveFileDialog.FileName;
       }
     }
 
