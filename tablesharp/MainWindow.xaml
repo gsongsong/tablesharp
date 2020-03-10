@@ -16,13 +16,13 @@
     <Grid>
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="Auto"/>
-        <ColumnDefinition/>
         <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition/>
       </Grid.ColumnDefinitions>
 
-      <Label Content="Table File:"/>
-      <Label Name="filename" Grid.Column="1"/>
-      <Button Content="Browse..." Click="Open" Grid.Column="2"/>
+      <Button Content="Browse..." Click="Open"/>
+      <Label Content="File:" Grid.Column="1"/>
+      <Label Name="filename" Grid.Column="2"/>
     </Grid>
 
     <ToolBar Grid.Row="1">
@@ -30,11 +30,11 @@
       <ComboBox x:Name="ExportFlavor" />
       <Button Content="Export..." Click="Export"/>
       <Separator/>
-      <Button Content="Insert above" Click="InsertAbove"/>
-      <Button Content="Insert below" Click="InsertBelow"/>
-      <Button Content="Remove row" Click="RemoveRow"/>
+      <Button x:Name="buttonInsertAbove" Content="Insert above" Click="InsertAbove"/>
+      <Button x:Name="buttonInsertBelow" Content="Insert below" Click="InsertBelow"/>
+      <Button x:Name="buttonRemoveRow" Content="Remove row" Click="RemoveRow"/>
     </ToolBar>
 
-    <DataGrid Name="dataGrid" AutoGeneratingColumn="OnAutoGeneratingColumn" Grid.Row="2" SelectionMode="Single" AlternatingRowBackground="#FFEEEEEE" GridLinesVisibility="Vertical"/>
+    <DataGrid Name="dataGrid" AutoGeneratingColumn="OnAutoGeneratingColumn" Grid.Row="2" SelectionMode="Single" AlternatingRowBackground="#FFEEEEEE" GridLinesVisibility="Vertical" CanUserDeleteRows="False" SelectionChanged="dataGrid_SelectionChanged"/>
   </Grid>
 </Window>

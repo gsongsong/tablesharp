@@ -38,6 +38,7 @@ namespace tablesharp
     {
       dataTable = new ObservableCollection<Item>();
       BindData(dataTable);
+      UpdateButtons();
     }
 
     private void Open(object sender, RoutedEventArgs e)
@@ -73,6 +74,7 @@ namespace tablesharp
           WriteIndented = true,
         });
         File.WriteAllText(saveFileDialog.FileName, json);
+        filename.Content = saveFileDialog.FileName;
       }
     }
 
@@ -110,26 +112,20 @@ namespace tablesharp
     private void InsertAbove(object sender, RoutedEventArgs e)
     {
       int selectedIndex = dataGrid.SelectedIndex;
-      if (selectedIndex == -1) return;
       dataTable.Insert(selectedIndex, new Item());
     }
 
     private void InsertBelow(object sender, RoutedEventArgs e)
     {
       int selectedIndex = dataGrid.SelectedIndex;
-      if (selectedIndex == -1) return;
       int indexToInsert = selectedIndex + 1;
-      if (indexToInsert > dataTable.Count) return;
       dataTable.Insert(indexToInsert, new Item());
     }
 
     private void RemoveRow(object sender, RoutedEventArgs e)
     {
       int selectedIndex = dataGrid.SelectedIndex;
-      if (selectedIndex == -1) return;
-      if (selectedIndex >= dataTable.Count) return;
       dataTable.RemoveAt(selectedIndex);
-      if (selectedIndex >= dataTable.Count) return;
       dataGrid.SelectedIndex = selectedIndex;
       dataGrid.Focus();
     }
@@ -137,6 +133,41 @@ namespace tablesharp
     private void OnAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
     {
       Item.OnAutoGeneratingColumn(sender, e);
+    }
+
+    private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+      UpdateButtons();
+    }
+
+    private void UpdateButtons()
+    {
+      int row = dataGrid.SelectedIndex;
+      int count = dataTable.Count;
+      if (row == count)
+      {
+        buttonInsertAbove.IsEnabled = true;
+        buttonInsertBelow.IsEnabled = false;
+        buttonRemoveRow.IsEnabled = false;
+      }
+      else if(row == -1)
+      {
+        buttonInsertAbove.IsEnabled = false;
+        buttonInsertBelow.IsEnabled = false;
+        buttonRemoveRow.IsEnabled = false;
+      }
+      else if (row == 0)
+      {
+        buttonInsertAbove.IsEnabled = true;
+        buttonInsertBelow.IsEnabled = true;
+        buttonRemoveRow.IsEnabled = true;
+      }
+      else 
+      {
+        buttonInsertAbove.IsEnabled = true;
+        buttonInsertBelow.IsEnabled = true;
+        buttonRemoveRow.IsEnabled = true;
+      }
     }
   }
 }
